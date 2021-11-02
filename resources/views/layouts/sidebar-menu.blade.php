@@ -10,6 +10,24 @@
       </li>
 
       <li class="nav-item">
+        <router-link to="/product/command" class="nav-link">
+          <i class="nav-icon fas fa-list orange"></i>
+          <p>
+            生産指示
+          </p>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
+        <router-link to="/delivery/side" class="nav-link">
+          <i class="nav-icon fas fa-list orange"></i>
+          <p>
+            受け渡し側
+          </p>
+        </router-link>
+      </li>
+
+      <li class="nav-item">
         <router-link to="/products" class="nav-link">
           <i class="nav-icon fas fa-list orange"></i>
           <p>

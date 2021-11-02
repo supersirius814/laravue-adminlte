@@ -15,6 +15,10 @@ window.Form = Form;
 import Gate from "./Gate";
 Vue.prototype.$gate = new Gate(window.user);
 
+import ElementUI from 'element-ui';
+import "element-ui/lib/theme-chalk/index.css";
+Vue.use(ElementUI);
+
 import Swal from 'sweetalert2';
 
 
@@ -25,10 +29,10 @@ const Toast = Swal.mixin({
     timer: 3000,
     timerProgressBar: true,
     onOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-  })
+})
 window.Swal = Swal;
 window.Toast = Toast;
 
@@ -37,7 +41,7 @@ Vue.use(VueProgressBar, {
     color: 'rgb(143, 255, 199)',
     failedColor: 'red',
     height: '3px'
-  });
+});
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -63,7 +67,7 @@ const router = new VueRouter({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- 
+
 // Components
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('dashboard', require('./components/Dashboard.vue'));
@@ -90,7 +94,7 @@ Vue.component(
 
 // Filter Section
 
-Vue.filter('myDate',function(created){
+Vue.filter('myDate', function(created) {
     return moment(created).format('MMMM Do YYYY');
 });
 
