@@ -240,7 +240,7 @@
         </table>
       </el-row>
       <el-dialog
-        title="製造数を入力"
+        title="「商品名」の製造数を入力"
         :visible.sync="calculatorVisible"
         width="30%"
       >
@@ -296,7 +296,8 @@
 						<button @click="elclick()" class="btn-cal-num">0</button>
 					</el-col>
 					<el-col :span="8">
-						<button @click="elclick()" class="btn-cal-num">ー</button>
+						<button v-if="addtominus" @click="elclickAdd()" class="btn-cal-num">+</button>
+						<button v-else @click="elclickAdd()" class="btn-cal-num">ー</button>
 					</el-col>
 				</el-row>
 			</el-col>
@@ -399,6 +400,7 @@ export default {
   components: { VueCal },
   data() {
     return {
+	  addtominus: false,
       calculatorVisible: false,
       columns: [
         { field: "name", key: "a", title: "Name", align: "center" },
@@ -455,6 +457,9 @@ export default {
     };
   },
   methods: {
+	elclickAdd(){
+		this.addtominus = !this.addtominus;
+	},
 	elclick(){
 		alert("Dddd");
 	},
