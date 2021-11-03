@@ -33,6 +33,7 @@
         "sweetalert2": "^9.17.2",
         "vform": "^1.0.1",
         "vue-cal": "^3.10.1",
+        "vue-easytable": "^2.10.0",
         "vue-progressbar": "^0.7.5",
         "vue-router": "^3.4.9",
         "vue-scrolling-table": "^1.0.4"

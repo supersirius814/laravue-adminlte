@@ -19,6 +19,10 @@ import ElementUI from 'element-ui';
 import "element-ui/lib/theme-chalk/index.css";
 Vue.use(ElementUI);
 
+import "vue-easytable/libs/theme-default/index.css";
+import VueEasytable from "vue-easytable";
+Vue.use(VueEasytable);
+
 import Swal from 'sweetalert2';
 
 
