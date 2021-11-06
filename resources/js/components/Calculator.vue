@@ -170,7 +170,20 @@ export default {
     elclickSave(){
       this.detail.production_num_user = this.rltNum;
       
+      var updateData = {
+        rltNum: this.rltNum,
+      }
+      // alert(this.detail.take_productions_id);
+      axios.put('api/productcommand/' + this.detail.take_productions_id, updateData).then(data => {
+        console.log('calculator success!');
+        document.querySelector('.el-dialog__headerbtn').click();
+        // this.commandTable = data.data;
+      })
+      .catch(() => {
+        console.log('calculator failed!');
+      });
     },
+
     upOne(){
       this.rltNum = Number(this.rltNum) + 1;
       this.operator = '';

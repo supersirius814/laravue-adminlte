@@ -65,9 +65,15 @@ class ProductCommandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $take_productions_id)
     {
+        // var_export($request->input('rltNum'));
         //
+        $qb = ProductCommand::where('take_productions_id', $take_productions_id)->update([
+            'production_num_user' => $request->input('rltNum'),
+        ]);
+        return response($qb);
+        
     }
 
     /**

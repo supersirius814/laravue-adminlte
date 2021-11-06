@@ -259,7 +259,9 @@
                     class="btn-primary-pos"
                     @click="calculatorVisibleFunc(scope.row)"
                   >
-                    {{scope.row.production_num_user}}/{{scope.row.production_num_serve}}
+                    <span v-if="scope.row.production_time_code >= 10 && scope.row.production_time_code < 11">
+                    {{ scope.row.production_num_user }}</span>
+                    <span v-else>0</span>/<span v-if="scope.row.production_time_code >= 10 && scope.row.production_time_code < 11">{{ scope.row.production_num_serve }}</span><span v-else>0</span>
                   </el-button>                
               </template>
             </el-table-column>
@@ -462,15 +464,6 @@ export default {
         this.commandTable = data.data;
       });
     },
-              loadProducts(){
-
-            // if(this.$gate.isAdmin()){
-              axios.get("api/product").then(({ data }) => (
-                // this.products = data.data
-                 console.log(data)
-              ));
-            // }
-          },
     viewDate(date, text){
       var stDate = date.startDate;
       stDate = stDate.toISOString();
