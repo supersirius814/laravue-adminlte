@@ -10,7 +10,7 @@
       </li>
 
       <li class="nav-item">
-        <router-link to="/product/command" class="nav-link">
+        <router-link to="/command" class="nav-link">
           <i class="nav-icon fas fa-list orange"></i>
           <p>
             生産指示

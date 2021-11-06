@@ -412,28 +412,7 @@
   padding-top: 15px;
 }
 
-table,
-tr td {
-  /* min-width: 400px; */
-  /* border:1px solid red */
-}
-tbody {
-  display: block;
-  height: 350px;
-  overflow: auto;
-}
-thead,
-tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-thead {
-  width: calc(100% - 1em);
-}
-table {
-  width: 100%;
-}
+
 .m-caption {
   font-size: 22px;
 }

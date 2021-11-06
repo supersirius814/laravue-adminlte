@@ -8,6 +8,7 @@
           </el-row>
           <el-row>
             <vue-cal
+              @view-change="viewDate"
               class="vuecal--blue-theme"
               xsmall
               :time="false"
@@ -81,233 +82,209 @@
           <el-button class="hours-time">22:00</el-button>
         </el-col>
       </el-row>
-      <el-row style="padding-top: 7px">
-        <table>
-          <thead>
-            <tr>
-              <td></td>
-              <td>33/35</td>
-              <td>33/35</td>
-              <td>33/35</td>
-              <td>33/35</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品</td>
-              <td>10:00〜</td>
-              <td>11:00〜</td>
-              <td>12:00〜</td>
-              <td>13:00〜</td>
-              <td>合計</td>
-            </tr>
-          </thead>
-          <hr />
-          <tbody>
-            <tr>
-              <td>極〈きわみ〉</td>
-              <td>
-                <el-button
-                  class="btn-primary-pos"
-                  @click="calculatorVisible = true"
-                >
-                  100/100
-                </el-button>
-              </td>
-              <td>
-                <el-button class="btn-primary-pos"> 100/100 </el-button>
-              </td>
-              <td>
-                <el-button class="btn-primary-pos"> 100/100 </el-button>
-              </td>
-              <td>
-                <el-button class="btn-primary-pos"> 100/100 </el-button>
-              </td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>匠〈たくみ〉</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>はまっこドリンクセット</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品99</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品12</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品23</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品45</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品67</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>極〈きわみ〉</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>匠〈たくみ〉</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>はまっこドリンクセット</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品99</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-            <tr>
-              <td>商品12</td>
-              <td>極〈きわみ〉</td>
-              <td>匠〈たくみ〉</td>
-              <td>はまっこドリンクセット</td>
-              <td>あああああああああああ あああああああああ２２</td>
-              <td>33/35</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- <el-row style="padding-top: 7px"> -->
+        <!-- <div class="card-body table-responsive p-0">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>33/35</th>
+                <th>33/35</th>
+                <th>33/35</th>
+                <th>33/35</th>
+                <th>33/35</th>
+              </tr>
+              <tr>
+                <th>商品</th>
+                <th>10:00〜</th>
+                <th>11:00〜</th>
+                <th>12:00〜</th>
+                <th>13:00〜</th>
+                <th>合計</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>極〈きわみ〉</td>
+                <td>
+                  <el-button
+                    class="btn-primary-pos"
+                    @click="calculatorVisible = true"
+                  >
+                    100/100
+                  </el-button>
+                </td>
+                <td>
+                  <el-button class="btn-primary-pos"> 100/100 </el-button>
+                </td>
+                <td>
+                  <el-button class="btn-primary-pos"> 100/100 </el-button>
+                </td>
+                <td>
+                  <el-button class="btn-primary-pos"> 100/100 </el-button>
+                </td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>匠〈たくみ〉</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>はまっこドリンクセット</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>商品99</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>商品12</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>商品23</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>商品45</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>商品67</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>極〈きわみ〉</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>匠〈たくみ〉</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>はまっこドリンクセット</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>商品99</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+              <tr>
+                <td>商品12</td>
+                <td>極〈きわみ〉</td>
+                <td>匠〈たくみ〉</td>
+                <td>はまっこドリンクセット</td>
+                <td>あああああああああああ あああああああああ２２</td>
+                <td>33/35</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> -->
+      <!-- </el-row> -->
+      <el-row class="row-padding">
+
+        <el-table
+          height="450"
+          :data="commandTable"
+          style="width: 100%">
+          <el-table-column label="" width="200">
+            <el-table-column label="商品" prop="item_code">
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="10:00〜" prop="production_num" :formatter="formatterTen">
+              <template slot-scope="scope">
+                  <el-button 
+                    size="medium"
+                    class="btn-primary-pos"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{scope.row.production_num_user}}/{{scope.row.production_num_serve}}
+                  </el-button>                
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="11:00〜" prop="production_num" :formatter="formatterEleven"></el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="12:00〜" prop="production_num" :formatter="formatterTwelve"></el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="13:00〜" prop="production_num" :formatter="formatterThirteen"></el-table-column>
+          </el-table-column>
+          <el-table-column label="511/535">
+            <el-table-column label="合計" fixed prop="production_num" :formatter="formatterThirteen"></el-table-column>
+          </el-table-column>
+        </el-table>
+
       </el-row>
       <el-dialog
         title="「商品名」の製造数を入力"
         :visible.sync="calculatorVisible"
         width="30%"
       >
-		<el-card style="border: inset; background-color:rgb(112 112 112 / 45%); color: black; text-align: center; font-size: 40px">
-			12
-		</el-card>
-		<el-row :gutter="10" class="row-padding">
-			<el-col :span="5">
-				<button @click="elclick()" class="btn-cal-num">1</button>
-			</el-col>
-			<el-col :span="5">
-				<button @click="elclick()" class="btn-cal-num">2</button>
-			</el-col>
-			<el-col :span="5">
-				<button @click="elclick()" class="btn-cal-num">3</button>
-			</el-col>
-			<el-col :span="9">
-				<button @click="elclick()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(270deg);"></i></button>
-			</el-col>
-		</el-row>
-		<el-row :gutter="10" class="row-padding">
-			<el-col :span="5">
-				<button @click="elclick()" class="btn-cal-num">4</button>
-			</el-col>
-			<el-col :span="5">
-				<button @click="elclick()" class="btn-cal-num">5</button>
-			</el-col>
-			<el-col :span="5">
-				<button @click="elclick()" class="btn-cal-num">6</button>
-			</el-col>
-			<el-col :span="9">
-				<button @click="elclick()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(90deg);"></i></button>
-			</el-col>
-		</el-row>
-		<el-row :gutter="10" class="row-padding">
-			<el-col :span="15">
-				<el-row :gutter="10">
-					<el-col :span="8">
-						<button @click="elclick()" class="btn-cal-num">7</button>
-					</el-col>
-					<el-col :span="8">
-						<button @click="elclick()" class="btn-cal-num">8</button>
-					</el-col>
-					<el-col :span="8">
-						<button @click="elclick()" class="btn-cal-num">9</button>
-					</el-col>
-				</el-row>
-				<el-row :gutter="10" class="row-padding">
-					<el-col :span="8">
-						<button @click="elclick()" class="btn-cal-num">C</button>
-					</el-col>
-					<el-col :span="8">
-						<button @click="elclick()" class="btn-cal-num">0</button>
-					</el-col>
-					<el-col :span="8">
-						<button v-if="addtominus" @click="elclickAdd()" class="btn-cal-num">+</button>
-						<button v-else @click="elclickAdd()" class="btn-cal-num">ー</button>
-					</el-col>
-				</el-row>
-			</el-col>
-			<el-col :span="9">
-				<el-row>
-					<button @click="elclick()" style="height: 105px; font-size: 30px" class="btn-cal-num">登録</button>
-				</el-row>
-			</el-col>
-			
-		</el-row>
+        <Calculator :detail="num_user"></Calculator>
       </el-dialog>
     </div>
   </section>
@@ -315,6 +292,8 @@
 
 
 <style>
+@import url("//unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css");
+
 .btn-cal-num {
 	background-color: #5A5A5A;
 	color: white; 
@@ -365,43 +344,27 @@
     display: none;
   } */
 
-table,
-tr td {
-  /* border:1px solid red */
-}
-tbody {
-  display: block;
-  height: 350px;
-  overflow: auto;
-}
-thead,
-tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-thead {
-  width: calc(100% - 1em);
-}
-table {
-  width: 100%;
-}
 </style>
+
 <script>
 import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/i18n/ja.js";
+import { DateTime } from 'luxon';
+import Calculator from "./Calculator.vue"
 // import VueScrollingTable from "vue-scrolling-table";
 // import "vue-scrolling-table/dist/style.css";
 
 const date = new Date();
 
 export default {
-  components: { VueCal },
+  components: { VueCal, DateTime, Calculator },
   data() {
     return {
+      commandTable: [],
 	  addtominus: false,
       calculatorVisible: false,
+      num_user: null,
       columns: [
         { field: "name", key: "a", title: "Name", align: "center" },
         { field: "date", key: "b", title: "Date", align: "left" },
@@ -457,6 +420,64 @@ export default {
     };
   },
   methods: {
+    calculatorVisibleFunc(data){
+      this.calculatorVisible = true;
+      this.num_user = data;
+    },
+    formatterTen(row, column){
+      if(row.production_time_code >= 10 && row.production_time_code < 11){
+        return row.production_num_user;
+      } else {
+        return 0;
+      }
+    },
+
+    formatterEleven(row){
+      if(row.production_time_code >= 10 && row.production_time_code < 11){
+        return row.production_num_user;
+      } else {
+        return 0;
+      }      
+    },
+
+    formatterTwelve(row){
+      if(row.production_time_code >= 11 && row.production_time_code < 12){
+        return row.production_num_user;
+      } else {
+        return 0;
+      }      
+    },
+
+    formatterThirteen(row){
+      if(row.production_time_code >= 12 && row.production_time_code < 13){
+        return row.production_num_user;
+      } else {
+        return 0;
+      }      
+    },
+
+    loadProductsCommand(){
+      axios.get('api/productcommand').then(data => {
+        console.log(data);
+        this.commandTable = data.data;
+      });
+    },
+              loadProducts(){
+
+            // if(this.$gate.isAdmin()){
+              axios.get("api/product").then(({ data }) => (
+                // this.products = data.data
+                 console.log(data)
+              ));
+            // }
+          },
+    viewDate(date, text){
+      var stDate = date.startDate;
+      stDate = stDate.toISOString();
+      stDate = DateTime.fromISO(stDate).toFormat('yyyy-MM-dd');
+      console.log(date.startDate);
+      console.log(stDate);
+    },
 	elclickAdd(){
 		this.addtominus = !this.addtominus;
 	},
@@ -481,7 +502,12 @@ export default {
   beforeUnmount() {
     clearInterval(this.timer);
   },
-  mounted() {},
-  created() {},
+  mounted() {
+
+  },
+  created() {
+    this.loadProductsCommand();
+    // this.loadProducts();
+  },
 };
 </script>
