@@ -169,8 +169,10 @@ export default {
   methods: {
     upOne(){
       this.rltNum = Number(this.rltNum) + 1;
+      this.operator = '';
     },
     downOne(){
+      this.operator = '';
       this.rltNum = Number(this.rltNum) - 1;
     },
     clearAll(){
