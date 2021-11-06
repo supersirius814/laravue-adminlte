@@ -243,6 +243,7 @@
       <!-- </el-row> -->
       <el-row class="row-padding">
         <el-table
+          v-if="datastatus=='first'"
           height="450"
           :data="commandTable"
           style="width: 100%">
@@ -258,21 +259,21 @@
               <template slot-scope="scope">
                 <span v-if="scope.row.production_time_code >= 10 && scope.row.production_time_code < 11">
                   <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>     
+                </span>
+                <span v-else>
+                  <el-button 
                     disabled
                     type="info"
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row)"
                   >
                     0/0
-                  </el-button>     
-                </span>
-                <span v-else>
-                  <el-button 
-                    type="info"
-                    class="btn-command"
-                    @click="calculatorVisibleFunc(scope.row)"
-                  >
-                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
                   </el-button> 
                 </span>
               </template>
@@ -283,22 +284,22 @@
               <template slot-scope="scope">
                 <span v-if="scope.row.production_time_code >= 11 && scope.row.production_time_code < 12">
                   <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>  
+                </span>
+                <span v-else>
+                  <el-button 
                     disabled
                     type="info"
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row)"
                   >
                     0/0
-                  </el-button>     
-                </span>
-                <span v-else>
-                  <el-button 
-                    type="info"
-                    class="btn-command"
-                    @click="calculatorVisibleFunc(scope.row)"
-                  >
-                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
-                  </el-button> 
+                  </el-button>    
                 </span>
               </template>
             </el-table-column>
@@ -308,6 +309,15 @@
               <template slot-scope="scope">
                 <span v-if="scope.row.production_time_code >= 12 && scope.row.production_time_code < 13">
                   <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+                <span v-else>
+                  <el-button 
                     disabled
                     type="info"
                     style="color: #1f2d3d"
@@ -315,16 +325,7 @@
                     @click="calculatorVisibleFunc(scope.row)"
                   >
                     0/0
-                  </el-button>     
-                </span>
-                <span v-else>
-                  <el-button 
-                    type="info"
-                    class="btn-command"
-                    @click="calculatorVisibleFunc(scope.row)"
-                  >
-                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
-                  </el-button> 
+                  </el-button>    
                 </span>
               </template>
             </el-table-column>
@@ -334,6 +335,15 @@
               <template slot-scope="scope">
                 <span v-if="scope.row.production_time_code >= 13 && scope.row.production_time_code < 14">
                   <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+                <span v-else>
+                  <el-button 
                     disabled
                     type="info"
                     class="btn-command"
@@ -342,7 +352,83 @@
                     0/0
                   </el-button>     
                 </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="511/535">
+            <el-table-column label="合計" fixed prop="production_num">
+              <template slot-scope="scope">
+                <el-button class="btn-command" style="" disabled type="warning">{{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}</el-button>
+              </template>
+            </el-table-column>
+          </el-table-column>
+        </el-table>
+        <el-table
+          v-else-if="datastatus=='second'"
+          height="450"
+          :data="commandTable"
+          style="width: 100%">
+          <el-table-column label="" width="200">
+            <el-table-column label="商品" prop="item_code">
+              <template slot-scope="scope">
+                <el-button disabled type="primary" class="btn-command">{{ scope.row.item_code }}</el-button>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="14:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 14 && scope.row.production_time_code < 15">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>     
+                </span>
                 <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button> 
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="15:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 15 && scope.row.production_time_code < 16">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>  
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>    
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="16:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 16 && scope.row.production_time_code < 17">
                   <el-button 
                     type="info"
                     class="btn-command"
@@ -351,18 +437,295 @@
                     {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
                   </el-button> 
                 </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    style="color: #1f2d3d"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>    
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="17:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 17 && scope.row.production_time_code < 18">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>     
+                </span>
               </template>
             </el-table-column>
           </el-table-column>
           <el-table-column label="511/535">
             <el-table-column label="合計" fixed prop="production_num">
               <template slot-scope="scope">
-                <el-button class="btn-command" style="" disabled type="warning">{{ scope.row.production_num_serve }}</el-button>
+                <el-button class="btn-command" style="" disabled type="warning">{{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}</el-button>
               </template>
             </el-table-column>
           </el-table-column>
         </el-table>
-
+        <el-table
+          v-else-if="datastatus=='third'"
+          height="450"
+          :data="commandTable"
+          style="width: 100%">
+          <el-table-column label="" width="200">
+            <el-table-column label="商品" prop="item_code">
+              <template slot-scope="scope">
+                <el-button disabled type="primary" class="btn-command">{{ scope.row.item_code }}</el-button>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="18:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 18 && scope.row.production_time_code < 19">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>     
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button> 
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="19:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 19 && scope.row.production_time_code < 20">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>  
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>    
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="20:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 20 && scope.row.production_time_code < 21">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    style="color: #1f2d3d"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>    
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="21:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 21 && scope.row.production_time_code < 22">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>     
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="511/535">
+            <el-table-column label="合計" fixed prop="production_num">
+              <template slot-scope="scope">
+                <el-button class="btn-command" style="" disabled type="warning">{{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}</el-button>
+              </template>
+            </el-table-column>
+          </el-table-column>
+        </el-table>
+        <el-table
+          v-else-if="datastatus=='fourth'"
+          height="450"
+          :data="commandTable"
+          style="width: 100%">
+          <el-table-column label="" width="200">
+            <el-table-column label="商品" prop="item_code">
+              <template slot-scope="scope">
+                <el-button disabled type="primary" class="btn-command">{{ scope.row.item_code }}</el-button>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="22:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 22 && scope.row.production_time_code < 23">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>     
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button> 
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="23:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 23 && scope.row.production_time_code < 24">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button>  
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>    
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="24:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 24 && scope.row.production_time_code < 5">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    style="color: #1f2d3d"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>    
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="5:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 5 && scope.row.production_time_code < 10">
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+                <span v-else>
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>     
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="511/535">
+            <el-table-column label="合計" fixed prop="production_num">
+              <template slot-scope="scope">
+                <el-button class="btn-command" style="" disabled type="warning">{{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}</el-button>
+              </template>
+            </el-table-column>
+          </el-table-column>
+        </el-table>
       </el-row>
       <el-dialog
         title="「商品名」の製造数を入力"
@@ -675,9 +1038,9 @@ export default {
     },
 
     loadProductsCommand(){
-      axios.get('api/productcommand/' + this.datastatus).then(data => {
-        // console.log(data);
-        this.commandTable = data.data;
+      axios.get('api/productcommand/' + this.datastatus).then(res => {
+        console.log(res);
+        this.commandTable = res.data;
       });
     },
     TenToThirteen(){

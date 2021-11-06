@@ -59,6 +59,10 @@ class ProductCommandController extends Controller
         if($id == 'first'){
             $qb = ProductCommand::where('production_time_code', '>=', '10')
                 ->where('production_time_code', '<', '14');
+            // $data = $qb->get();
+            // foreach($data as $item){
+            //     var_export($item);
+            // }
         } else if($id == 'second') {
             $qb = ProductCommand::where('production_time_code', '>=', '14')
                 ->where('production_time_code', '<', '18');
