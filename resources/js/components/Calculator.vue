@@ -59,7 +59,7 @@
 			</el-col>
 			<el-col :span="9">
 				<el-row>
-					<button @click="elclick()" style="height: 105px; font-size: 30px" class="btn-cal-num">登録</button>
+					<button @click="elclickSave()" style="height: 105px; font-size: 30px" class="btn-cal-num">登録</button>
 				</el-row>
 			</el-col>
 			
@@ -167,6 +167,10 @@ export default {
     };
   },
   methods: {
+    elclickSave(){
+      this.detail.production_num_user = this.rltNum;
+      
+    },
     upOne(){
       this.rltNum = Number(this.rltNum) + 1;
       this.operator = '';
