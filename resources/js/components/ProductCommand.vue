@@ -70,16 +70,16 @@
         class="row-padding"
       >
         <el-col :span="6">
-          <el-button class="hours-time">10:00〜13:00</el-button>
+          <el-button class="hours-time" @click="TenToThirteen">10:00〜13:00</el-button>
         </el-col>
         <el-col :span="6">
-          <el-button class="hours-time">14:00〜17:00</el-button>
+          <el-button class="hours-time" @click="FourteenToSeventeen">14:00〜17:00</el-button>
         </el-col>
         <el-col :span="6">
-          <el-button class="hours-time">18:00〜21:00</el-button>
+          <el-button class="hours-time" @click="SixteenToTwenOne">18:00〜21:00</el-button>
         </el-col>
         <el-col :span="6">
-          <el-button class="hours-time">22:00</el-button>
+          <el-button class="hours-time" @click="TimeOver">22:00</el-button>
         </el-col>
       </el-row>
       <!-- <el-row style="padding-top: 7px"> -->
@@ -242,41 +242,124 @@
         </div> -->
       <!-- </el-row> -->
       <el-row class="row-padding">
-
         <el-table
           height="450"
           :data="commandTable"
           style="width: 100%">
           <el-table-column label="" width="200">
             <el-table-column label="商品" prop="item_code">
-            </el-table-column>
-          </el-table-column>
-          <el-table-column label="33/35">
-            <el-table-column label="10:00〜" prop="production_num" :formatter="formatterTen">
               <template slot-scope="scope">
-                  <el-button 
-                    size="medium"
-                    class="btn-primary-pos"
-                    @click="calculatorVisibleFunc(scope.row)"
-                  >
-                    <span v-if="scope.row.production_time_code >= 10 && scope.row.production_time_code < 11">
-                    {{ scope.row.production_num_user }}</span>
-                    <span v-else>0</span>/<span v-if="scope.row.production_time_code >= 10 && scope.row.production_time_code < 11">{{ scope.row.production_num_serve }}</span><span v-else>0</span>
-                  </el-button>                
+                <el-button disabled type="primary" class="btn-command">{{ scope.row.item_code }}</el-button>
               </template>
             </el-table-column>
           </el-table-column>
           <el-table-column label="33/35">
-            <el-table-column label="11:00〜" prop="production_num" :formatter="formatterEleven"></el-table-column>
+            <el-table-column label="10:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 10 && scope.row.production_time_code < 11">
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>     
+                </span>
+                <span v-else>
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+              </template>
+            </el-table-column>
           </el-table-column>
           <el-table-column label="33/35">
-            <el-table-column label="12:00〜" prop="production_num" :formatter="formatterTwelve"></el-table-column>
+            <el-table-column label="11:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 11 && scope.row.production_time_code < 12">
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>     
+                </span>
+                <span v-else>
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+              </template>
+            </el-table-column>
           </el-table-column>
           <el-table-column label="33/35">
-            <el-table-column label="13:00〜" prop="production_num" :formatter="formatterThirteen"></el-table-column>
+            <el-table-column label="12:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 12 && scope.row.production_time_code < 13">
+                  <el-button 
+                    disabled
+                    type="info"
+                    style="color: #1f2d3d"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>     
+                </span>
+                <span v-else>
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column label="33/35">
+            <el-table-column label="13:00〜" prop="production_num">
+              <template slot-scope="scope">
+                <span v-if="scope.row.production_time_code >= 13 && scope.row.production_time_code < 14">
+                  <el-button 
+                    disabled
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    0/0
+                  </el-button>     
+                </span>
+                <span v-else>
+                  <el-button 
+                    type="info"
+                    class="btn-command"
+                    @click="calculatorVisibleFunc(scope.row)"
+                  >
+                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                  </el-button> 
+                </span>
+              </template>
+            </el-table-column>
           </el-table-column>
           <el-table-column label="511/535">
-            <el-table-column label="合計" fixed prop="production_num" :formatter="formatterThirteen"></el-table-column>
+            <el-table-column label="合計" fixed prop="production_num">
+              <template slot-scope="scope">
+                <el-button class="btn-command" style="" disabled type="warning">{{ scope.row.production_num_serve }}</el-button>
+              </template>
+            </el-table-column>
           </el-table-column>
         </el-table>
 
@@ -288,13 +371,94 @@
       >
         <Calculator :detail="num_user"></Calculator>
       </el-dialog>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNew" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <el-card>
+                    <el-card style="border: inset; background-color:rgb(112 112 112 / 45%); color: black; text-align: center; font-size: 40px; height: 100px">
+                      <span style="position: absolute; left: 35px;">{{ operator }}</span>{{ rltNum }}
+                    </el-card>
+                    <el-row :gutter="10" class="row-padding">
+                      <el-col :span="5">
+                        <button @click="key(1)" class="btn-cal-num">1</button>
+                      </el-col>
+                      <el-col :span="5">
+                        <button @click="key(2)" class="btn-cal-num">2</button>
+                      </el-col>
+                      <el-col :span="5">
+                        <button @click="key(3)" class="btn-cal-num">3</button>
+                      </el-col>
+                      <el-col :span="9">
+                        <button @click="upOne()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(270deg);"></i></button>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="10" class="row-padding">
+                      <el-col :span="5">
+                        <button @click="key(4)" class="btn-cal-num">4</button>
+                      </el-col>
+                      <el-col :span="5">
+                        <button @click="key(5)" class="btn-cal-num">5</button>
+                      </el-col>
+                      <el-col :span="5">
+                        <button @click="key(6)" class="btn-cal-num">6</button>
+                      </el-col>
+                      <el-col :span="9">
+                        <button @click="downOne()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(90deg);"></i></button>
+                      </el-col>
+                    </el-row>
+                    <el-row :gutter="10" class="row-padding">
+                      <el-col :span="15">
+                        <el-row :gutter="10">
+                          <el-col :span="8">
+                            <button @click="key(7)" class="btn-cal-num">7</button>
+                          </el-col>
+                          <el-col :span="8">
+                            <button @click="key(8)" class="btn-cal-num">8</button>
+                          </el-col>
+                          <el-col :span="8">
+                            <button @click="key(9)" class="btn-cal-num">9</button>
+                          </el-col>
+                        </el-row>
+                        <el-row :gutter="10" class="row-padding">
+                          <el-col :span="8">
+                            <button @click="clearAll()" class="btn-cal-num">C</button>
+                          </el-col>
+                          <el-col :span="8">
+                            <button @click="key(0)" class="btn-cal-num">0</button>
+                          </el-col>
+                          <el-col :span="8">
+                            <button v-if="addtominus" @click="elclickAdd()" class="btn-cal-num">+</button>
+                            <button v-else @click="elclickAdd()" class="btn-cal-num">ー</button>
+                          </el-col>
+                        </el-row>
+                      </el-col>
+                      <el-col :span="9">
+                        <el-row>
+                          <button @click="elclickSave()" style="height: 105px; font-size: 30px" class="btn-cal-num">登録</button>
+                        </el-row>
+                      </el-col>
+                    </el-row>
+                  </el-card>
+                </div>
+            </div>
+        </div>
     </div>
   </section>
 </template>
 
 
 <style>
-@import url("//unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css");
+.btn-command{
+  color: #1f2d3d!important;
+  width: -webkit-fill-available;
+}
 
 .btn-cal-num {
 	background-color: #5A5A5A;
@@ -353,20 +517,22 @@ import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
 import "vue-cal/dist/i18n/ja.js";
 import { DateTime } from 'luxon';
-import Calculator from "./Calculator.vue"
 // import VueScrollingTable from "vue-scrolling-table";
 // import "vue-scrolling-table/dist/style.css";
 
 const date = new Date();
 
 export default {
-  components: { VueCal, DateTime, Calculator },
+  components: { VueCal, DateTime },
   data() {
     return {
+      datastatus: 'first',
+      rltNum: '',
+      operator: '',
       commandTable: [],
-	  addtominus: false,
+	    addtominus: false,
       calculatorVisible: false,
-      num_user: null,
+      num_user: {},
       columns: [
         { field: "name", key: "a", title: "Name", align: "center" },
         { field: "date", key: "b", title: "Date", align: "left" },
@@ -422,9 +588,59 @@ export default {
     };
   },
   methods: {
+    elclickSave(){
+      this.num_user.production_num_user = this.rltNum;
+      
+      var updateData = {
+        rltNum: this.rltNum,
+      }
+      // alert(this.detail.take_productions_id);
+      axios.put('api/productcommand/' + this.num_user.take_productions_id, updateData).then(data => {
+        console.log('calculator success!');
+        $('#addNew').modal('hide');
+      })
+      .catch(() => {
+        console.log('calculator failed!');
+      });
+    },
+
+    elclickAdd(){
+      this.addtominus = !this.addtominus;
+        if(this.addtominus){
+          this.operator = "-";
+        } else{
+          this.operator = "+";
+        }
+    },
+
+    upOne(){
+      this.rltNum = Number(this.rltNum) + 1;
+      this.operator = '';
+    },
+    downOne(){
+      this.operator = '';
+      this.rltNum = Number(this.rltNum) - 1;
+    },
+    clearAll(){
+      this.rltNum = '';
+      this.operator = '';
+    },
+    key(num){
+      if(this.operator == '+'){
+        this.rltNum = Number(this.rltNum) + num;
+      } else if(this.operator == '-'){
+        this.rltNum = Number(this.rltNum) - num;
+      } else{
+        this.rltNum = String(this.rltNum) + num;
+      }
+    },
     calculatorVisibleFunc(data){
-      this.calculatorVisible = true;
+      // alert(data.production_num_user);
+      $('#addNew').modal('show');
       this.num_user = data;
+      this.rltNum = data.production_num_user;
+      // this.calculatorVisible = true;
+
     },
     formatterTen(row, column){
       if(row.production_time_code >= 10 && row.production_time_code < 11){
@@ -459,10 +675,26 @@ export default {
     },
 
     loadProductsCommand(){
-      axios.get('api/productcommand').then(data => {
-        console.log(data);
+      axios.get('api/productcommand/' + this.datastatus).then(data => {
+        // console.log(data);
         this.commandTable = data.data;
       });
+    },
+    TenToThirteen(){
+      this.datastatus = 'first';
+      this.loadProductsCommand();
+    },
+    FourteenToSeventeen(){
+      this.datastatus = 'second';
+      this.loadProductsCommand();
+    },
+    SixteenToTwenOne(){
+      this.datastatus = 'third';
+      this.loadProductsCommand();
+    },
+    TimeOver(){
+      this.datastatus = 'fourth';
+      this.loadProductsCommand();
     },
     viewDate(date, text){
       var stDate = date.startDate;
@@ -471,12 +703,6 @@ export default {
       console.log(date.startDate);
       console.log(stDate);
     },
-	elclickAdd(){
-		this.addtominus = !this.addtominus;
-	},
-	elclick(){
-		alert("Dddd");
-	},
     setDateTime() {
       const date = new Date();
       this.dateTime = {

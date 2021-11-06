@@ -56,6 +56,21 @@ class ProductCommandController extends Controller
     public function show($id)
     {
         //
+        if($id == 'first'){
+            $qb = ProductCommand::where('production_time_code', '>=', '10')
+                ->where('production_time_code', '<', '14');
+        } else if($id == 'second') {
+            $qb = ProductCommand::where('production_time_code', '>=', '14')
+                ->where('production_time_code', '<', '18');
+        } else if($id == 'third') {
+            $qb = ProductCommand::where('production_time_code', '>=', '18')
+                ->where('production_time_code', '<', '22');
+        } else if($id == 'fourth'){
+            $qb = ProductCommand::where('production_time_code', '>=', '22')
+                ->where('production_time_code', '<=', '24');
+        }
+
+        return response($qb->get());
     }
 
     /**
