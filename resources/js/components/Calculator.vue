@@ -1,59 +1,55 @@
 <template>
   <section class="content">
-		<!-- <el-card style="border: inset; background-color:rgb(112 112 112 / 45%); color: black; text-align: center; padding: 0px"> -->
-    
-    <el-row>
-      <el-input v-model="rltNum" size="medium" style="height: 100%; width: 100%"></el-input>
-    </el-row>
-        
-		<!-- </el-card> -->
+		<el-card style="border: inset; background-color:rgb(112 112 112 / 45%); color: black; text-align: center; font-size: 40px; height: 100px">
+      <span style="position: absolute; left: 35px;">{{ operator }}</span>{{ rltNum }}
+		</el-card>
 		<el-row :gutter="10" class="row-padding">
 			<el-col :span="5">
-				<button @click="rltNum=String(rltNum)+1" class="btn-cal-num">1</button>
+				<button @click="key(1)" class="btn-cal-num">1</button>
 			</el-col>
 			<el-col :span="5">
-				<button @click="rltNum=String(rltNum)+2" class="btn-cal-num">2</button>
+				<button @click="key(2)" class="btn-cal-num">2</button>
 			</el-col>
 			<el-col :span="5">
-				<button @click="rltNum=String(rltNum)+3" class="btn-cal-num">3</button>
+				<button @click="key(3)" class="btn-cal-num">3</button>
 			</el-col>
 			<el-col :span="9">
-				<button @click="elclick()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(270deg);"></i></button>
+				<button @click="upOne()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(270deg);"></i></button>
 			</el-col>
 		</el-row>
 		<el-row :gutter="10" class="row-padding">
 			<el-col :span="5">
-				<button @click="rltNum=String(rltNum)+4" class="btn-cal-num">4</button>
+				<button @click="key(4)" class="btn-cal-num">4</button>
 			</el-col>
 			<el-col :span="5">
-				<button @click="rltNum=String(rltNum)+5" class="btn-cal-num">5</button>
+				<button @click="key(5)" class="btn-cal-num">5</button>
 			</el-col>
 			<el-col :span="5">
-				<button @click="rltNum=String(rltNum)+6" class="btn-cal-num">6</button>
+				<button @click="key(6)" class="btn-cal-num">6</button>
 			</el-col>
 			<el-col :span="9">
-				<button @click="elclick()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(90deg);"></i></button>
+				<button @click="downOne()" class="btn-cal-num"><i class="fas fa-play" style="transform: rotate(90deg);"></i></button>
 			</el-col>
 		</el-row>
 		<el-row :gutter="10" class="row-padding">
 			<el-col :span="15">
 				<el-row :gutter="10">
 					<el-col :span="8">
-						<button @click="rltNum=String(rltNum)+7" class="btn-cal-num">7</button>
+						<button @click="key(7)" class="btn-cal-num">7</button>
 					</el-col>
 					<el-col :span="8">
-						<button @click="rltNum=String(rltNum)+8" class="btn-cal-num">8</button>
+						<button @click="key(8)" class="btn-cal-num">8</button>
 					</el-col>
 					<el-col :span="8">
-						<button @click="rltNum=String(rltNum)+9" class="btn-cal-num">9</button>
+						<button @click="key(9)" class="btn-cal-num">9</button>
 					</el-col>
 				</el-row>
 				<el-row :gutter="10" class="row-padding">
 					<el-col :span="8">
-						<button @click="rltNum=''" class="btn-cal-num">C</button>
+						<button @click="clearAll()" class="btn-cal-num">C</button>
 					</el-col>
 					<el-col :span="8">
-						<button @click="rltNum=String(rltNum)+0" class="btn-cal-num">0</button>
+						<button @click="key(0)" class="btn-cal-num">0</button>
 					</el-col>
 					<el-col :span="8">
 						<button v-if="addtominus" @click="elclickAdd()" class="btn-cal-num">+</button>
@@ -147,6 +143,7 @@ export default {
   },
   data() {
     return {
+      operator: '',
       rltNum: this.detail.production_num_user,
       commandTable: [],
 	    addtominus: false,
@@ -170,7 +167,25 @@ export default {
     };
   },
   methods: {
-
+    upOne(){
+      this.rltNum = Number(this.rltNum) + 1;
+    },
+    downOne(){
+      this.rltNum = Number(this.rltNum) - 1;
+    },
+    clearAll(){
+      this.rltNum = '';
+      this.operator = '';
+    },
+    key(num){
+      if(this.operator == '+'){
+        this.rltNum = Number(this.rltNum) + num;
+      } else if(this.operator == '-'){
+        this.rltNum = Number(this.rltNum) - num;
+      } else{
+        this.rltNum = String(this.rltNum) + num;
+      }
+    },
     formatterTen(row, column){
       if(row.production_time_code >= 10 && row.production_time_code < 11){
         return row.production_num_user;
@@ -227,6 +242,11 @@ export default {
     },
 	elclickAdd(){
 		this.addtominus = !this.addtominus;
+      if(this.addtominus){
+        this.operator = "-";
+      } else{
+        this.operator = "+";
+      }
 	},
 	elclick(){
 		alert("Dddd");
