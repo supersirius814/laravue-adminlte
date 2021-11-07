@@ -125,36 +125,149 @@ class ProductCommandController extends Controller
                     }
                 }
             }
-            // var_export(count($data)); die;
-            // var_export(count($data));12
-            $key = 0;
-            $data_rlt = [];
-            foreach($data as $index => $item){
-                // echo $key."==========".$index."\n";
-                array_push($data_rlt, $item);
-                $data_rlt[$key]['pcommand'] = $index;
-                
-                // $data_rlt[$key]['pcommand'] = $item;
-                $key ++;
-            }
-            // echo $key;
-            // var_export($data_rlt); die;
-            // foreach($data as $item){
-            //     var_export($item);
-            // }
         } else if($id == 'second') {
             $qb = ProductCommand::where('production_time_code', '>=', '14')
-                ->where('production_time_code', '<', '18');
+                ->where('production_time_code', '<', '18')->orderBy('item_code');
+                
+            $item_codes = $qb->pluck('item_code');
+            $time_codes = $qb->pluck('production_time_code');
+            $num_user = $qb->pluck('production_num_user');
+            $num_serve = $qb->pluck('production_num_serve');
+
+            for($i = 0; $i < count($item_codes); $i ++){
+                if($time_codes[$i] == 14){
+                    if(isset($data[$item_codes[$i]]['time14']['user'])){
+                        $data[$item_codes[$i]]['time14']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time14']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time14']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time14']['serve'] = $num_serve[$i];
+                    }
+                } elseif ($time_codes[$i] == 15) {
+                    if(isset($data[$item_codes[$i]]['time15']['user'])){
+                        $data[$item_codes[$i]]['time15']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time15']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time15']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time15']['serve'] = $num_serve[$i];
+                    }
+                } else if($time_codes[$i] == 16) {
+                    if(isset($data[$item_codes[$i]]['time16']['user'])){
+                        $data[$item_codes[$i]]['time16']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time16']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time16']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time16']['serve'] = $num_serve[$i];
+                    }
+                } else if($time_codes[$i] == 17){
+                    if(isset($data[$item_codes[$i]]['time17']['user'])){
+                        $data[$item_codes[$i]]['time17']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time17']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time17']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time17']['serve'] = $num_serve[$i];
+                    }
+                }
+            }
+
         } else if($id == 'third') {
             $qb = ProductCommand::where('production_time_code', '>=', '18')
-                ->where('production_time_code', '<', '22');
+                ->where('production_time_code', '<', '22')->orderBy('item_code');
+
+            $item_codes = $qb->pluck('item_code');
+            $time_codes = $qb->pluck('production_time_code');
+            $num_user = $qb->pluck('production_num_user');
+            $num_serve = $qb->pluck('production_num_serve');
+
+            for($i = 0; $i < count($item_codes); $i ++){
+                if($time_codes[$i] == 18){
+                    if(isset($data[$item_codes[$i]]['time18']['user'])){
+                        $data[$item_codes[$i]]['time18']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time18']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time18']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time18']['serve'] = $num_serve[$i];
+                    }
+                } elseif ($time_codes[$i] == 19) {
+                    if(isset($data[$item_codes[$i]]['time19']['user'])){
+                        $data[$item_codes[$i]]['time19']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time19']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time19']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time19']['serve'] = $num_serve[$i];
+                    }
+                } else if($time_codes[$i] == 20) {
+                    if(isset($data[$item_codes[$i]]['time20']['user'])){
+                        $data[$item_codes[$i]]['time20']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time20']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time20']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time20']['serve'] = $num_serve[$i];
+                    }
+                } else if($time_codes[$i] == 21){
+                    if(isset($data[$item_codes[$i]]['time21']['user'])){
+                        $data[$item_codes[$i]]['time21']['user'] += $num_user[$i];
+                        $data[$item_codes[$i]]['time21']['serve'] += $num_serve[$i];
+                    } else{
+                        $data[$item_codes[$i]]['time21']['user'] = $num_user[$i];
+                        $data[$item_codes[$i]]['time21']['serve'] = $num_serve[$i];
+                    }
+                }
+            }
         } else if($id == 'fourth'){
             $qb = ProductCommand::where('production_time_code', '>=', '22')
-                ->where('production_time_code', '<=', '24');
+                ->where('production_time_code', '<=', '24')->orderBy('item_code');
+
+                $item_codes = $qb->pluck('item_code');
+                $time_codes = $qb->pluck('production_time_code');
+                $num_user = $qb->pluck('production_num_user');
+                $num_serve = $qb->pluck('production_num_serve');
+    
+                for($i = 0; $i < count($item_codes); $i ++){
+                    if($time_codes[$i] == 22){
+                        if(isset($data[$item_codes[$i]]['time22']['user'])){
+                            $data[$item_codes[$i]]['time22']['user'] += $num_user[$i];
+                            $data[$item_codes[$i]]['time22']['serve'] += $num_serve[$i];
+                        } else{
+                            $data[$item_codes[$i]]['time22']['user'] = $num_user[$i];
+                            $data[$item_codes[$i]]['time22']['serve'] = $num_serve[$i];
+                        }
+                    } elseif ($time_codes[$i] == 23) {
+                        if(isset($data[$item_codes[$i]]['time23']['user'])){
+                            $data[$item_codes[$i]]['time23']['user'] += $num_user[$i];
+                            $data[$item_codes[$i]]['time23']['serve'] += $num_serve[$i];
+                        } else{
+                            $data[$item_codes[$i]]['time23']['user'] = $num_user[$i];
+                            $data[$item_codes[$i]]['time23']['serve'] = $num_serve[$i];
+                        }
+                    } else if($time_codes[$i] == 24) {
+                        if(isset($data[$item_codes[$i]]['time24']['user'])){
+                            $data[$item_codes[$i]]['time24']['user'] += $num_user[$i];
+                            $data[$item_codes[$i]]['time24']['serve'] += $num_serve[$i];
+                        } else{
+                            $data[$item_codes[$i]]['time24']['user'] = $num_user[$i];
+                            $data[$item_codes[$i]]['time24']['serve'] = $num_serve[$i];
+                        }
+                    } else if($time_codes[$i] == 5){
+                        if(isset($data[$item_codes[$i]]['time5']['user'])){
+                            $data[$item_codes[$i]]['time5']['user'] += $num_user[$i];
+                            $data[$item_codes[$i]]['time5']['serve'] += $num_serve[$i];
+                        } else{
+                            $data[$item_codes[$i]]['time5']['user'] = $num_user[$i];
+                            $data[$item_codes[$i]]['time5']['serve'] = $num_serve[$i];
+                        }
+                    }
+                }
         }
 
-        // return response($qb->orderBy('item_code')->get());
-        // $dd[0] = $data;
+        $key = 0;
+        $data_rlt = [];
+        foreach($data as $index => $item){
+            array_push($data_rlt, $item);
+            $data_rlt[$key]['pcommand'] = $index;
+            $key ++;
+        }
+
         return response($data_rlt);
     }
 
@@ -165,11 +278,18 @@ class ProductCommandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $take_productions_id)
+    public function update(Request $request, $pcommand)
     {
         // var_export($request->input('rltNum'));
         //
-        $qb = ProductCommand::where('take_productions_id', $take_productions_id)->update([
+        if($request->input('timeSign') == 'ten') $timeSign = 10;
+        if($request->input('timeSign') == 'eleven') $timeSign = 11;
+        if($request->input('timeSign') == 'twelve') $timeSign = 12;
+        if($request->input('timeSign') == 'thirteen') $timeSign = 13;
+
+        $qb = ProductCommand::where('item_code', $pcommand)
+            ->where('production_time_code', $timeSign)
+            ->update([
             'production_num_user' => $request->input('rltNum'),
         ]);
         return response($qb);
