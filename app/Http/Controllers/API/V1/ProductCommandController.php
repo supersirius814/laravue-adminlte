@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCommand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductCommandController extends Controller
@@ -51,44 +52,23 @@ class ProductCommandController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(Request $request, $id)
+    {   
+        $currentDate = $request->input('currentDate');
+        $qb = ProductCommand::select('handover_date','item_code', 'production_time_code', 'production_num_user', 'production_num_serve')
+        ->whereRaw("DATE_FORMAT(handover_date,'%Y/%m/%d') = '$currentDate'");
+        $flg = $qb;
+        if($flg->get()->isEmpty()) return;
         if($id == 'first'){
-            $qb = ProductCommand::select('item_code', 'production_time_code', 'production_num_user', 'production_num_serve')->where('production_time_code', '>=', '10')
-                ->where('production_time_code', '<', '14')->orderBy('item_code');
+            $qb->where('production_time_code', '>=', '10')
+            ->where('production_time_code', '<', '14')->orderBy('item_code');
             $item_codes = $qb->pluck('item_code');
             $time_codes = $qb->pluck('production_time_code');
             $num_user = $qb->pluck('production_num_user');
             $num_serve = $qb->pluck('production_num_serve');
-
-            // $data = [];
-
-
-            // for($i = 0; $i < count($item_codes); $i ++){
-            //     if($time_codes[$i] == 10){
-            //         if(isset($data[$item_codes[$i]]['ten']['user'])){
-            //             $data[$item_codes[$i]]['ten']['user'] += $num_user[$i];
-            //             $data[$item_codes[$i]]['ten']['user'] = $num_serve[$i];
-            //         } else{
-            //             $data[$item_codes[$i]]['ten']['user'] = $num_user[$i];
-            //             $data[$item_codes[$i]]['ten']['user'] = $num_serve[$i];
-            //         }
-                    
-            //         $data[$item_codes[$i]] += $num_serve[$i];
-            //     } elseif($item_codes[$i] == 11){
-            //         $data[$item_codes[$i]]['user'] += $num_user[$i];
-            //         $data[$item_codes[$i]]['serve'] += $num_serve[$i];                    
-            //     } elseif($time_codes[$i] == 12){
-            //         $data[$item_codes[$i]]['twelve']['user'] += $num_user[$i];
-            //         $data[$item_codes[$i]]['twelve']['serve'] += $num_serve[$i];
-            //     } else if($time_codes[$i] == 13){
-            //         $data[$item_codes[$i]]['thirteen']['user'] += $num_user[$i];
-            //         $data[$item_codes[$i]]['thirteen']['serve'] += $num_serve[$i];
-            //     }
-            // }
 
             for($i = 0; $i < count($item_codes); $i ++){
                 if($time_codes[$i] == 10){
@@ -267,7 +247,6 @@ class ProductCommandController extends Controller
             $data_rlt[$key]['pcommand'] = $index;
             $key ++;
         }
-
         return response($data_rlt);
     }
 
@@ -299,8 +278,11 @@ class ProductCommandController extends Controller
         if($request->input('timeSign') == 'time24') $timeSign = 24;
         if($request->input('timeSign') == 'time5') $timeSign = 5;
 
+        $currentDate = $request->input('currentDate');
+
         $qb = ProductCommand::where('item_code', $pcommand)
             ->where('production_time_code', $timeSign)
+            ->whereRaw("DATE_FORMAT(handover_date,'%Y/%m/%d') = '$currentDate'")
             ->update([
             'production_num_user' => $request->input('rltNum'),
         ]);

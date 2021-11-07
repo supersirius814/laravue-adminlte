@@ -53,14 +53,15 @@
               最終更新：<span>2021/10/25 11:12:30</span>
             </el-col>
             <el-col :span="9">
-              <button
+              <el-button type="info" class="btn-reload" icon="el-icon-refresh-right" @click="reload()" circle></el-button>
+              <!-- <button
                 @click="reload()"
                 type="button"
                 class="btn btn-tool"
                 style="line-height: 1; border: solid"
               >
                 <i class="fas fa-redo-alt"></i>
-              </button>
+              </button> -->
             </el-col>
           </el-row>
         </el-col>
@@ -794,6 +795,9 @@
 
 
 <style>
+.btn-reload:hover, .btn-reload:focus{
+  background-color: #a6a9ad!important;
+}
 .el-table--enable-row-transition .el-table__body td.el-table__cell{
   /* text-align: center; */
 }
@@ -833,9 +837,9 @@
   color: #707070;
 }
 
-.el-button:focus, .el-button:hover{
+/* .el-button:focus, .el-button:hover{
 	background-color: #1f2d3d;
-}
+} */
 
 .content-wrapper {
   background-color: white;
@@ -874,6 +878,7 @@ export default {
   components: { VueCal, DateTime },
   data() {
     return {
+      currentDate: '',
       timeSign: '',
       datastatus: 'first',
       rltNum: '',
@@ -899,12 +904,17 @@ export default {
     };
   },
   methods: {
+    initDate(){
+      this.currentDate = this.dateTime.year + '/' + this.dateTime.month + '/' + this.dateTime.date;
+      // console.log(this.currentDate);
+    },
     elclickSave(){
       this.num_user[this.timeSign].user = this.rltNum;
       
       var updateData = {
         rltNum: this.rltNum,
         timeSign: this.timeSign,
+        currentDate: this.currentDate,
       }
       // alert(this.detail.take_productions_id);
       axios.put('api/productcommand/' + this.num_user.pcommand, updateData).then(data => {
@@ -1033,8 +1043,16 @@ export default {
       this.loadProductsCommand();
     },
     loadProductsCommand(){
-      axios.get('api/productcommand/' + this.datastatus).then(res => {
-        this.commandTable = res.data;
+      var showData = {
+        currentDate: this.currentDate,
+      };
+      axios.get('api/productcommand/' + this.datastatus + '/?currentDate=' + this.currentDate).then(res => {
+        if(res.data == ''){
+          this.commandTable = null;
+        } else{
+          this.commandTable = res.data;
+        }
+        // this.commandTable = res.data;
         // console.log(this.commandTable);
       });
     },
@@ -1057,9 +1075,10 @@ export default {
     viewDate(date, text){
       var stDate = date.startDate;
       stDate = stDate.toISOString();
-      stDate = DateTime.fromISO(stDate).toFormat('yyyy-MM-dd');
-      console.log(date.startDate);
-      console.log(stDate);
+      stDate = DateTime.fromISO(stDate).toFormat('yyyy/MM/dd');
+      this.currentDate = stDate;
+      this.loadProductsCommand();
+      // console.log(stDate);
     },
     setDateTime() {
       const date = new Date();
@@ -1083,7 +1102,9 @@ export default {
 
   },
   created() {
+    this.initDate();
     this.loadProductsCommand();
+    
     // this.loadProducts();
   },
 };
