@@ -82,6 +82,9 @@
           <el-button class="hours-time" @click="TimeOver">22:00</el-button>
         </el-col>
       </el-row>
+      <!-- <el-table :data="commandTable">
+        <el-table-column prop="pcommand" label="products"></el-table-column>
+      </el-table> -->
       <!-- <el-row style="padding-top: 7px"> -->
         <!-- <div class="card-body table-responsive p-0">
           <table class="table table-hover">
@@ -250,20 +253,20 @@
           <el-table-column label="" width="200">
             <el-table-column label="商品" prop="item_code">
               <template slot-scope="scope">
-                <el-button disabled type="primary" class="btn-command">{{ scope.row.item_code }}</el-button>
+                <el-button disabled type="primary" class="btn-command">{{ scope.row.pcommand}}</el-button>
               </template>
             </el-table-column>
           </el-table-column>
           <el-table-column label="33/35">
             <el-table-column label="10:00〜" prop="production_num">
               <template slot-scope="scope">
-                <span v-if="scope.row.production_time_code >= 10 && scope.row.production_time_code < 11">
+                <span v-if="scope.row.ten">
                   <el-button 
                     type="info"
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row)"
                   >
-                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                    {{ scope.row.ten.user }}/{{ scope.row.ten.serve }}
                   </el-button>     
                 </span>
                 <span v-else>
@@ -282,13 +285,13 @@
           <el-table-column label="33/35">
             <el-table-column label="11:00〜" prop="production_num">
               <template slot-scope="scope">
-                <span v-if="scope.row.production_time_code >= 11 && scope.row.production_time_code < 12">
+                <span v-if="scope.row.eleven">
                   <el-button 
                     type="info"
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row)"
                   >
-                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                    {{ scope.row.eleven.user }}/{{ scope.row.eleven.serve }}
                   </el-button>  
                 </span>
                 <span v-else>
@@ -307,13 +310,13 @@
           <el-table-column label="33/35">
             <el-table-column label="12:00〜" prop="production_num">
               <template slot-scope="scope">
-                <span v-if="scope.row.production_time_code >= 12 && scope.row.production_time_code < 13">
+                <span v-if="scope.row.twelve">
                   <el-button 
                     type="info"
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row)"
                   >
-                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                    {{ scope.row.twelve.user }}/{{ scope.row.twelve.serve }}
                   </el-button> 
                 </span>
                 <span v-else>
@@ -333,13 +336,13 @@
           <el-table-column label="33/35">
             <el-table-column label="13:00〜" prop="production_num">
               <template slot-scope="scope">
-                <span v-if="scope.row.production_time_code >= 13 && scope.row.production_time_code < 14">
+                <span v-if="scope.row.thirteen">
                   <el-button 
                     type="info"
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row)"
                   >
-                    {{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}
+                    {{ scope.row.thirteen.user }}/{{ scope.row.thirteen.serve }}
                   </el-button> 
                 </span>
                 <span v-else>
@@ -1039,7 +1042,15 @@ export default {
 
     loadProductsCommand(){
       axios.get('api/productcommand/' + this.datastatus).then(res => {
-        console.log(res);
+      // axios.get('api/productcommand').then(res => {
+        // console.log("===============================================")
+        console.log(res.data);
+        // var data = Array();
+        // res.data.forEach((item, index) => {
+        //   data[item.item_code][item.production_time_code]['num_user'] = item.production_num_user;
+        //   data[item.item_code][item.production_time_code]['num_serve'] = item.production_num_serve;
+        // });
+        // console.log(data);
         this.commandTable = res.data;
       });
     },
