@@ -359,10 +359,7 @@
             </el-table-column>
           </el-table-column>
           <el-table-column label="511/535">
-            <el-table-column label="合計" fixed prop="production_num">
-              <template slot-scope="scope">
-                <el-button class="btn-command" style="" disabled type="warning">{{ scope.row.production_num_user }}/{{ scope.row.production_num_serve }}</el-button>
-              </template>
+            <el-table-column label="合計" class-name="totoalColumn" fixed="right" prop="pcommand" :formatter="formatterTotal">
             </el-table-column>
           </el-table-column>
         </el-table>
@@ -821,6 +818,14 @@
 
 
 <style>
+.el-table--enable-row-transition .el-table__body td.el-table__cell{
+  /* text-align: center; */
+}
+.totoalColumn{
+  /* width: -webkit-fill-available; */
+  text-align: center;
+  color: red;
+}
 .btn-command{
   color: #1f2d3d!important;
   width: -webkit-fill-available;
@@ -1007,6 +1012,26 @@ export default {
       this.rltNum = data.production_num_user;
       // this.calculatorVisible = true;
 
+    },
+    formatterTotal(row){
+      var totalUser = 0, totalServe = 0;
+      if(row.ten){
+        totalUser += row.ten.user;
+        totalServe += row.ten.serve;
+      }
+      if(row.eleven){
+        totalUser += row.eleven.user;
+        totalServe += row.eleven.serve;
+      }
+      if(row.twelve){
+        totalUser += row.twelve.user;
+        totalServe += row.twelve.serve;
+      }
+      if(row.thirteen){
+        totalUser += row.thirteen.user;
+        totalServe += row.thirteen.serve;
+      }
+      return totalUser + "/" + totalServe;
     },
     formatterTen(row, column){
       if(row.production_time_code >= 10 && row.production_time_code < 11){
