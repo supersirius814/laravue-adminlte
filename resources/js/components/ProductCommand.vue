@@ -54,6 +54,7 @@
             </el-col>
             <el-col :span="9">
               <button
+                @click="reload()"
                 type="button"
                 class="btn btn-tool"
                 style="line-height: 1; border: solid"
@@ -360,7 +361,7 @@
           </el-table-column>
         </el-table>
         <el-table
-          v-else-if="datastatus=='second'"
+          v-if="datastatus=='second'"
           height="450"
           :data="commandTable"
           style="width: 100%">
@@ -428,7 +429,7 @@
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row, scope.column)"
                   >
-                    {{ scope.row.time16.user }}/{{ scope.row.time16.user }}
+                    {{ scope.row.time16.user }}/{{ scope.row.time16.serve }}
                   </el-button> 
                 </span>
                 <span v-else>
@@ -474,7 +475,7 @@
           </el-table-column>
         </el-table>
         <el-table
-          v-else-if="datastatus=='third'"
+          v-if="datastatus=='third'"
           height="450"
           :data="commandTable"
           style="width: 100%">
@@ -494,7 +495,7 @@
                     class="btn-command"
                     @click="calculatorVisibleFunc(scope.row, scope.column)"
                   >
-                    {{ scope.row.time18.serve }}/{{ scope.row.time18.serve }}
+                    {{ scope.row.time18.user }}/{{ scope.row.time18.serve }}
                   </el-button>     
                 </span>
                 <span v-else>
@@ -588,7 +589,7 @@
           </el-table-column>
         </el-table>
         <el-table
-          v-else-if="datastatus=='fourth'"
+          v-if="datastatus=='fourth'"
           height="450"
           :data="commandTable"
           style="width: 100%">
@@ -881,44 +882,6 @@ export default {
 	    addtominus: false,
       calculatorVisible: false,
       num_user: {},
-      columns: [
-        { field: "name", key: "a", title: "Name", align: "center" },
-        { field: "date", key: "b", title: "Date", align: "left" },
-        { field: "hobby", key: "c", title: "Hobby", align: "right" },
-        { field: "address", key: "d", title: "Address" },
-      ],
-      tableData: [
-        {
-          name: "John",
-          date: "1900-05-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Shanghai",
-        },
-        {
-          name: "Dickerson",
-          date: "1910-06-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Beijing",
-        },
-        {
-          name: "Larsen",
-          date: "2000-07-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Chongqing",
-        },
-        {
-          name: "Geneva",
-          date: "2010-08-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Xiamen",
-        },
-        {
-          name: "Jami",
-          date: "2020-09-20",
-          hobby: "coding and coding repeat",
-          address: "No.1 Century Avenue, Shenzhen",
-        },
-      ],
       dateTime: {
         year: date.getFullYear(),
         month: date.getMonth() + 1,
@@ -991,20 +954,6 @@ export default {
       this.rltNum = row[this.timeSign].user;
       // data = 90;
       this.num_user = row;
-      // if(data.ten){
-      //   this.rltNum = data.ten.user;
-      // }
-      // if(data.eleven){
-      //   this.rltNum = data.eleven.user;
-      // }
-      // if(data.twelve){
-      //   this.rltNum = data.twelve.user;
-      // }
-      // if(data.thirteen){
-      //   this.rltNum = data.thirteen.user;
-      // }
-      // this.calculatorVisible = true;
-
     },
     formatterTotal(row){
       var totalUser = 0, totalServe = 0;
@@ -1080,19 +1029,13 @@ export default {
 
       return totalUser + "/" + totalServe;
     },
-
+    reload(){
+      this.loadProductsCommand();
+    },
     loadProductsCommand(){
       axios.get('api/productcommand/' + this.datastatus).then(res => {
-      // axios.get('api/productcommand').then(res => {
-        // console.log("===============================================")
-        console.log(res.data);
-        // var data = Array();
-        // res.data.forEach((item, index) => {
-        //   data[item.item_code][item.production_time_code]['num_user'] = item.production_num_user;
-        //   data[item.item_code][item.production_time_code]['num_serve'] = item.production_num_serve;
-        // });
-        // console.log(data);
         this.commandTable = res.data;
+        // console.log(this.commandTable);
       });
     },
     TenToThirteen(){

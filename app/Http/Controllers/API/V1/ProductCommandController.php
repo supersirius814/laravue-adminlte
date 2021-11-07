@@ -286,6 +286,18 @@ class ProductCommandController extends Controller
         if($request->input('timeSign') == 'eleven') $timeSign = 11;
         if($request->input('timeSign') == 'twelve') $timeSign = 12;
         if($request->input('timeSign') == 'thirteen') $timeSign = 13;
+        if($request->input('timeSign') == 'time14') $timeSign = 14;
+        if($request->input('timeSign') == 'time15') $timeSign = 15;
+        if($request->input('timeSign') == 'time16') $timeSign = 16;
+        if($request->input('timeSign') == 'time17') $timeSign = 17;
+        if($request->input('timeSign') == 'time18') $timeSign = 18;
+        if($request->input('timeSign') == 'time19') $timeSign = 19;
+        if($request->input('timeSign') == 'time20') $timeSign = 20;
+        if($request->input('timeSign') == 'time21') $timeSign = 21;
+        if($request->input('timeSign') == 'time22') $timeSign = 22;
+        if($request->input('timeSign') == 'time23') $timeSign = 23;
+        if($request->input('timeSign') == 'time24') $timeSign = 24;
+        if($request->input('timeSign') == 'time5') $timeSign = 5;
 
         $qb = ProductCommand::where('item_code', $pcommand)
             ->where('production_time_code', $timeSign)
