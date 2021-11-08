@@ -106,7 +106,7 @@ class ProductCommandController extends Controller
                 }
             }
         } else if($id == 'second') {
-            $qb = ProductCommand::where('production_time_code', '>=', '14')
+            $qb->where('production_time_code', '>=', '14')
                 ->where('production_time_code', '<', '18')->orderBy('item_code');
                 
             $item_codes = $qb->pluck('item_code');
@@ -151,7 +151,7 @@ class ProductCommandController extends Controller
             }
 
         } else if($id == 'third') {
-            $qb = ProductCommand::where('production_time_code', '>=', '18')
+            $qb->where('production_time_code', '>=', '18')
                 ->where('production_time_code', '<', '22')->orderBy('item_code');
 
             $item_codes = $qb->pluck('item_code');
@@ -195,7 +195,7 @@ class ProductCommandController extends Controller
                 }
             }
         } else if($id == 'fourth'){
-            $qb = ProductCommand::where('production_time_code', '>=', '22')
+            $qb->where('production_time_code', '>=', '22')
                 ->where('production_time_code', '<=', '24')->orderBy('item_code');
 
                 $item_codes = $qb->pluck('item_code');
@@ -239,6 +239,8 @@ class ProductCommandController extends Controller
                     }
                 }
         }
+
+        if(!isset($data)) return;
 
         $key = 0;
         $data_rlt = [];

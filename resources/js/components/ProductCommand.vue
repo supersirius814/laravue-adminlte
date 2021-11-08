@@ -8,6 +8,7 @@
           </el-row>
           <el-row>
             <vue-cal
+              :selected-date="currentDate"
               @view-change="viewDate"
               class="vuecal--blue-theme"
               xsmall
@@ -704,14 +705,6 @@
           </el-table-column>
         </el-table>
       </el-row>
-      <el-dialog
-        title="「商品名」の製造数を入力"
-        :visible.sync="calculatorVisible"
-        width="30%"
-      >
-        <Calculator :detail="num_user"></Calculator>
-      </el-dialog>
-
         <!-- Modal -->
         <div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="addNew" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -905,8 +898,13 @@ export default {
   },
   methods: {
     initDate(){
-      this.currentDate = this.dateTime.year + '/' + this.dateTime.month + '/' + this.dateTime.date;
-      // console.log(this.currentDate);
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = yyyy + '/' + mm + '/' + dd;
+      this.currentDate = today;
     },
     elclickSave(){
       this.num_user[this.timeSign].user = this.rltNum;
@@ -1040,6 +1038,18 @@ export default {
       return totalUser + "/" + totalServe;
     },
     reload(){
+      this.initDate();
+      var currentHours = this.dateTime.hours;
+      if(currentHours >= 10 && currentHours < 14){
+        this.datastatus = 'first';
+      } else if(currentHours > 13 && currentHours < 18){
+        this.datastatus = 'second';
+      } else if(currentHours > 18 && currentHours < 22){
+        this.datastatus = 'third';
+      } else{
+        this.datastatus = 'fourth';
+      }
+      // alert(this.dateTime.hours);
       this.loadProductsCommand();
     },
     loadProductsCommand(){

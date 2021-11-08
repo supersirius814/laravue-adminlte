@@ -60,19 +60,20 @@
               最終更新：<span>2021/10/25 11:12:30</span>
             </el-col>
             <el-col :span="9">
-              <button
+              <el-button type="info" class="btn-reload" icon="el-icon-refresh-right" @click="reload()" circle></el-button>
+              <!-- <button
                 type="button"
                 class="btn btn-tool"
                 style="line-height: 1; border: solid"
               >
                 <i class="fas fa-redo-alt"></i>
-              </button>
+              </button> -->
             </el-col>
           </el-row>
         </el-col>
       </el-row>
       <el-row class="row-padding" style="overflow-x: auto">
-        <table style="text-align: center; width: 1750px">
+        <table style="text-align: center; width: 1750px" class="tbl-order">
           <thead>
             <tr>
               <td colspan="4">
@@ -352,6 +353,28 @@
 
 
 <style>
+
+.tbl-order table,
+.tble-order tr td {
+  /* border:1px solid red */
+}
+.tbl-order tbody {
+  display: block;
+  height: 350px;
+  overflow: auto;
+}
+.tbl-order thead,
+.tbl-order tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.tbl-order thead {
+  width: calc(100% - 1em);
+}
+.tbl-order table {
+  width: 100%;
+}
 .form-font-size{
   font-size: 12px;
 }
